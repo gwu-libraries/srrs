@@ -45,7 +45,7 @@ $t->printHTMLHeader();
 //echo '<div id="banner-bg"><div id="banner"><img src="img/banner.jpg" /></div></div>';
 echo '<div id="libheader-container" style="">
 	<div id="libheader" style="">
-		<div class="libheader-logo hide-lo" style=""><a href="http://www.gwu.edu" target="_blank" title="GWU website"><img src="gwheaderlogo.png" alt="logo: The George Washington University" /></a></div>
+		<div class="libheader-logo hide-lo" style=""><a href="http://www.gwu.edu" target="_blank" title="GWU website"><img src="img/gwheaderlogo.png" alt="logo: The George Washington University" /></a></div>
 		<div class="libheader-liblink" style=""><a href="http://library.gwu.edu" target="_blank" title="GW Libraries website">GW Libraries</a></div>
 		<div class="libheader-link" style=""><a href="#" target="_blank" title="">Link 1</a></div>
 		<div class="libheader-link" style=""><a href="#" target="_blank" title="">Link 2</a></div>
