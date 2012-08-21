@@ -13,11 +13,11 @@
 /**
 * Include Template class
 */
-include_once('lib/Template1.class.php');
+include_once('lib/Template.class.php');
 
 // Auth included in Template.php
 $auth = new Auth();
-$t = new Template1();
+$t = new Template();
 $msg = '';
 
 $resume = (isset($_POST['resume'])) ? $_POST['resume'] : '';
@@ -42,7 +42,7 @@ else if (isset($_COOKIE['ID'])) {
 $t->printHTMLHeader();
 
 // Print out logoImage if it exists
-//echo '<div id="banner-bg"><div id="banner"><img src="img/banner.jpg" /></div></div>';
+echo '<div id="banner-bg"><div id="banner"><img src="img/banner.jpg" /></div></div>';
 
 // echo (!empty($conf['ui']['logoImage']))
 //		? '<div align="left"><img src="' . $conf['ui']['logoImage'] . '" alt="logo" vspace="5"/></div>'
@@ -59,5 +59,5 @@ else {
 
 $t->endMain();
 // Print HTML footer
-//$t->printHTMLFooter();
+$t->printHTMLFooter();
 ?>

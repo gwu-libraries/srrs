@@ -166,14 +166,14 @@ class Auth {
 						case 'notFoundException':
 						{
 							//$msg .= translate('Login failed 1. Please verify your data.') . '<br/>';
-							 $msg .= 'Login failed . Please verify your data.' . '<br/>';
+							 $msg .= 'Login failed 1. Please verify your data.' . '<br/>';
 							return $msg;						
 						}
 						break;
 						case 'missingAttrException':
 						{
 							 //$msg .= translate('Login failed 1. Please verify your data.') . '<br/>';
-							$msg .= 'Login failed . Please verify your data.' . '<br/>';
+							$msg .= 'Login failed 2. Please verify your data.' . '<br/>';
 							return $msg;
 						}
 						break;
@@ -241,7 +241,7 @@ class Auth {
 			{
 				CmnFns::write_log('Login failed.', NULL, $_SERVER['REMOTE_ADDR']);
 				 //$msg .= translate('Login failed 1. Please verify your data.') . '<br/>';
-				$msg .= 'Login failed as you have not registered any courses for the current semester.' . '<br/>';
+				$msg .= 'Login failed 3. Please verify your data.' . '<br/>';
 				return $msg;
 			}
 		}

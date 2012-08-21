@@ -189,8 +189,11 @@ class Template {
 	?>
 	</div>
 	<div id="portal-footer">
+	
 		<div id="footer-container">
-			<div class="footer-segment">Melvin Gelman Library</div>
+		
+
+			<div class="footer-segment">Estelle and Melvin Gelman Library</div>
     		<div class="footer-segment">2130 H St. NW</div>
 			<div class="footer-segment">Washington, DC 20052</div>
 			<div class="footer-segment">202-994-6558</div>

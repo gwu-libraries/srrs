@@ -68,12 +68,15 @@ class Template1 {
 	?>
 	<link rel="shortcut icon" href="favicon.ico"/>
 	<link rel="icon" href="favicon.ico"/>
-
+	<script language="JavaScript" type="text/javascript" src="<?php echo $path?>functions1.js"></script>
+	<script language="JavaScript" type="text/javascript" src="<?php echo $path?>ajax.js"></script>
 	<style type="text/css">
 	@import url(<?php echo $path?>jscalendar/calendar-blue-custom.css);
 	@import url(<?php echo $path?>css.css);
 	</style>
-
+	<script type="text/javascript" src="<?php echo $path?>jscalendar/calendar.js"></script>
+	<script type="text/javascript" src="<?php echo $path?>jscalendar/lang/<?php echo get_jscalendar_file()?>"></script>
+	<script type="text/javascript" src="<?php echo $path?>jscalendar/calendar-setup.js"></script>
 	</head>
 	<body>
 	<?php
@@ -196,7 +199,7 @@ class Template1 {
 	</div>
 	<div id="portal-footer">
 		<div id="footer-container">
-			<div class="footer-segment">Melvin Gelman Library</div>
+			<div class="footer-segment">Estelle and Melvin Gelman Library</div>
     		<div class="footer-segment">2130 H St. NW</div>
 			<div class="footer-segment">Washington, DC 20052</div>
 			<div class="footer-segment">202-994-6558</div>
@@ -330,7 +333,7 @@ class Template1 {
 					-->
 					<li>
 					
-		              <?php $link->doLink('index.php?logout=true', translate('Log Out')) ?>
+		              <?php $link->doLink('index1.php?logout=true', translate('Log Out')) ?>
 		            </li></ul>
 		<!--Showing Floor Plans to the user -->
 				<!--	<?php echo '<p style="margin-top:7;font-size:11pt;font-weight:bold;">' . translate('Floor Plans') . '</p>';?>

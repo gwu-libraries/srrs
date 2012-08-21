@@ -241,6 +241,12 @@ function printLoginForm($msg = '', $resume = '') {
 	  <tr bgcolor="#EDEDED">
 		<td colspan="2" style="border-bottom: solid 1px #CCCCCC;">
 		  <h5 align="center"><?php echo translate('Please Log In')?></h5>
+		<p>
+		<br>
+		<center>
+		       <!-- Note:  message if any goes here -->
+		<p>
+		<br>	
 		</td>
 	  </tr>
 	<?php if ($conf['app']['wrlc']) {?>
@@ -325,6 +331,9 @@ function printLoginForm($msg = '', $resume = '') {
 <p align="center">
 <?php $link->doLink('roschedule.php', translate('View Schedule'), '', '', translate('View a read-only version of the schedule')) ?>
 |
+<!--<?php $link->doLink('m/index.php', 'Mobile Version', '', '', 'Mobile Version') ?>
+|-->
+
 <?php
 if (!$conf['app']['wrlc']){
 $link->doLink('forgot_pwd.php', translate('I Forgot My Password'), '', '', translate('Retreive lost password'));
@@ -334,6 +343,8 @@ $link->doLink('forgot_pwd.php', translate('I Forgot My Password'), '', '', trans
 } ?>
 
 <?php $link->doLink('javascript: help();', translate('Help'), '', '', translate('Get online help')) ?>
+
+
 </p>
 </form>
 <?php

@@ -124,6 +124,7 @@ class PearDbConnection extends IDbConnection
 		}
 		
 		$dsn = "$this->dbType://$this->dbUser:$this->dbPassword@$this->hostSpec/{$this->dbNames[0]}";
+	echo $dsn;
 
         $db = DB::connect($dsn, true);	// Make persistant connection to database
         

@@ -18,7 +18,7 @@ include_once('lib/Template.class.php');
 // Auth included in Template.php
 $auth = new Auth();
 $t = new Template();
-$msg = '<h2>*** THIS SERVICE IS TEMPORARILY UNAVAILABLE [10/08/2011] ***</h2> ';
+$msg = '<strong>* NOTICE: Problems occur when making new reservations. Troubleshooting will resume 12/7/2011. Thank you for your patience!</strong> ';
 
 $resume = (isset($_POST['resume'])) ? $_POST['resume'] : '';
 	

@@ -112,16 +112,10 @@ function showReservationTable($res, $err) {
       <table width="100%" border="0" cellspacing="1" cellpadding="0">
         <tr class="rowHeaders">
           <td width="10%">
-		  	<?php $link->doLink($_SERVER['PHP_SELF'] .  
-				$util->getSortingUrl($qs, 'start_date'), translate('Start Date')); ?> 
-	
-						
+		  	<?php $link->doLink($_SERVER['PHP_SELF'] . $util->getSortingUrl($qs, 'start_date'), translate('Start Date')); ?>
 		  </td>
 		  <td width="10%">
-		 	 <?php $link->doLink($_SERVER['PHP_SELF'] . 
-				$util->getSortingUrl($qs, 'end_date'), translate('End Date')); ?> 
-
-							 
+		 	<?php $link->doLink($_SERVER['PHP_SELF'] . $util->getSortingUrl($qs, 'end_date'), translate('End Date')); ?>
 		  </td>
           <td width="23%">
 		  	<?php $link->doLink($_SERVER['PHP_SELF'] . $util->getSortingUrl($qs, 'name'), translate('Room')); ?>
@@ -158,14 +152,14 @@ function showReservationTable($res, $err) {
         $modified = (isset($rs['modified']) && !empty($rs['modified'])) ?
 		Time::formatDateTime($rs['modified']) : 'N/A';
         echo "        <tr class=\"$class\" align=\"center\" style=\"background-color:$bgcolor;\">"
-					. "          <td>" /*. $link->getLink("javascript: reserve('v','','','" . $rs['resid']. "');", */.Time::formatReservationDate($rs['start_date'], $rs['starttime'])/*, '', '', translate('View this reservation'))*/ . '</td>'
-					. '          <td>' /*. $link->getLink("javascript: reserve('v','','','" . $rs['resid']. "');",*/. Time::formatReservationDate($rs['end_date'], $rs['endtime'])/*, '', '', translate('View this reservation'))*/ . '</td>'
+					. "          <td>" . $link->getLink("javascript: reserve('v','','','" . $rs['resid']. "');", Time::formatReservationDate($rs['start_date'], $rs['starttime']), '', '', translate('View this reservation')) . '</td>'
+					. '          <td>' . $link->getLink("javascript: reserve('v','','','" . $rs['resid']. "');", Time::formatReservationDate($rs['end_date'], $rs['endtime']), '', '', translate('View this reservation')) . '</td>'
 					. '          <td style="text-align:left;">' . $rs['name'] . '</td>'
 					. '          <td>' . Time::formatTime($rs['starttime']) . '</td>'
 					. '          <td>' . Time::formatTime($rs['endtime']) . '</td>'
                    // . '          <td>' . Time::formatDateTime($rs['created']) . '</td>'
-					/*. '          <td>' . $link->getLink("javascript: reserve('m','','','" . $rs['resid'] . "');", translate('Modify'), '', '', translate('Modify this reservation')) . '</td>'
-					. '          <td>' . $link->getLink("javascript: reserve('d','','','" . $rs['resid'] . "');", translate('Delete'), '', '', translate('Delete this reservation')) . '</td>'*/
+					. '          <td>' . $link->getLink("javascript: reserve('m','','','" . $rs['resid'] . "');", translate('Modify'), '', '', translate('Modify this reservation')) . '</td>'
+					. '          <td>' . $link->getLink("javascript: reserve('d','','','" . $rs['resid'] . "');", translate('Delete'), '', '', translate('Delete this reservation')) . '</td>'
 					. "        </tr>\n";
 	}
 ?>

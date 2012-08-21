@@ -149,19 +149,19 @@ function get_hour_header($th, $startDay, $endDay, $timespan, $current_date) {
         	$header .= "<td  width=\"$width%\" colspan=\"$cols\">$time</td>";
 		}else
 		{
-			$header .= "<td  width=\"$width%\" colspan=\"$cols\" class=\"scheduleTimePast\">Starting at</td>";
+			$header .= "<td  width=\"$width%\" colspan=\"$cols\" class=\"scheduleTimePast\">$time</td>";
 		}
 		$i++;
     }
 
     // Close row, start next
-    $header .= "</tr>\n<tr class=\"scheduleTimes\"><td width=\"$width%\" colspan=\"$cols\" class=\"scheduleTimePast\">$time</td>\n";
+    $header .= "</tr>\n<tr class=\"scheduleTimes\">\n";
 
 
     // Create the fraction hour minute marks
     for ($x = 0; $x < $totCol; $x++)
     {
-       // $header .= "<td width=\"$width%\">&nbsp;</td>";
+        $header .= "<td width=\"$width%\">&nbsp;</td>";
     }
 
     return $header;
@@ -268,7 +268,7 @@ function print_blank_cols($cols, $start, $span, $ts, $machid, $scheduleid, $sche
 			if (($ts + (($tstart+$span)*60)) > time() + 3*60*60/*Time::getAdjustedTime(mktime())*/)
 			{
             	/*$js = "onmouseover=\"blankOver(this);\" onmouseout=\"blankOut(this, '$class');\" onclick=\"reserve('r','$machid','$ts','','$scheduleid',$is_blackout,'','',$tstart,$tend);\"";*/
-		$js='<a href="http://encyclopedia.gwu.edu/srrs/m/reserve1.php?type='. 'r' ."&machid=" . $machid . "&start_date=" . $ts . "&resid=" . "''" . '&scheduleid=' . $scheduleid . "&is_blackout=" . $is_blackout . "&read_only=" . "''" . "&pending=" . "''" . "&starttime=" . $tstart . "&endtime=" . $tend . '"'.">Reserve Room</a>";
+		$js='<a href="http://encyclopedia.gwu.edu/srrs/reserve1.php?type='. 'r' ."&machid=" . $machid . "&start_date=" . $ts . "&resid=" . "''" . '&scheduleid=' . $scheduleid . "&is_blackout=" . $is_blackout . "&read_only=" . "''" . "&pending=" . "''" . "&starttime=" . $tstart . "&endtime=" . $tend . '"'.">reserve</a>";
 			}
 		 	else
 			{

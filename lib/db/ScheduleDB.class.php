@@ -53,7 +53,7 @@ class ScheduleDB extends DBEngine {
 		$mach_ids = $this->make_del_list($machids);
 		
 		// If it starts between the 2 dates, ends between the 2 dates, or surrounds the 2 dates, get it
-		$sql = 'SELECT res.*, res_users.*, login.fname, login.lname, participant.memberid as participantid, participant.owner'
+		/*$sql = 'SELECT res.*, res_users.*, login.fname, login.lname, participant.memberid as participantid, participant.owner'
 				. ' FROM ' . $this->get_table(TBL_RESERVATIONS) . ' as res'
 				. ' INNER JOIN ' . $this->get_table(TBL_RESERVATION_USERS) . ' as res_users ON res.resid = res_users.resid'
 				. ' INNER JOIN ' . $this->get_table(TBL_LOGIN) . ' as login ON res_users.memberid = login.memberid'
@@ -74,9 +74,32 @@ class ScheduleDB extends DBEngine {
 		
 		$sql .= ' AND res.machid IN (' . $mach_ids . ')';
 		
-		$sql .= ' ORDER BY res.start_date, res.starttime, res.end_date, res.endtime';
+		$sql .= ' ORDER BY res.start_date, res.starttime, res.end_date, res.endtime';*/
+		$sql = 'SELECT res.* '
+		                                 .' FROM ' .$this->get_table(TBL_RESERVATIONS) . ' as res'
+						                         . ' WHERE ( '
+									                                                 . '( '
+															                                                         . '(start_date >= ? AND start_date <= ?)'
+																						                                                         . ' OR '
+																													                                                         . '(end_date >= ? AND end_date <= ?)'
+																																				                                                 . ' )'
+																																										                                                 . ' OR '
+																																																                                                 . '(start_date <= ?  AND end_date >= ?)'
+																																																						                         .      ' )';
 
-		$values = array($current_memberid, $start_date, $end_date, $start_date, $end_date, $start_date, $end_date);
+
+																																																									                 if ($this->scheduleType == RESERVATION_ONLY)
+																																																											                         $sql .= ' AND res.is_blackout <> 1 ';
+
+																																																														                 $sql .= ' AND res.machid IN (' . $mach_ids . ')';
+
+																																																																                 $sql .= ' ORDER BY res.start_date, res.starttime, res.end_date, res.endtime'; 
+
+																																																									
+
+		//$values = array($current_memberid, $start_date, $end_date, $start_date, $end_date, $start_date, $end_date);
+		$values = array( $start_date, $end_date, $start_date, $end_date, $start_date, $end_date);
+
 		
 		$p = $this->db->prepare($sql);
 		$result = $this->db->execute($p, $values);

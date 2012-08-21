@@ -511,7 +511,7 @@ function print_buttons_and_hidden(&$res) {
     }
     // Print cancel button as long as type is not "view"
 	if ($type != RES_TYPE_VIEW) {
-		//echo '&nbsp;&nbsp;&nbsp;<input type="button" name="close" value="' . translate('Cancel') . '" class="button" onclick="window.close();" />';
+		echo '&nbsp;&nbsp;&nbsp;<input type="button" name="close" value="' . translate('Cancel') . '" class="button" onclick="window.close();" />';
 	}
 	if ($type != RES_TYPE_ADD && $is_owner) {
 		// echo '&nbsp;&nbsp;';

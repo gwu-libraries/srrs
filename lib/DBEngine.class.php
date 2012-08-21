@@ -72,7 +72,7 @@ class DBEngine {
 
         // If there is an error, print to browser, print to logfile and kill app
         if (PEAR::isError($db)) {
-            die ('Error connecting to database: ' . $db->getMessage() );
+            die ('Error connecting to database: ' . $db->getMessage());
         }
 
         @$db->setOption('portability', DB_PORTABILITY_ALL);

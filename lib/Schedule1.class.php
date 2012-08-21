@@ -120,7 +120,7 @@ class Schedule {
         $hour_header = get_hour_header($this->get_time_array(), $this->startDay, $this->endDay, $this->timespan, $current_date);    // Get the headers (same for all tables)
 
 		if ($this->scheduleType != READ_ONLY && $this->scheduleType != BLACKOUT_ONLY)
-		{ /*PRINT_TIMESLOTInfo();*/ }
+		{ PRINT_TIMESLOTInfo(); }
 		
 		start_day_table($this->get_display_date(), $hour_header, TRUE); // Start the table for the current date.
 		$this->print_reservations();    // Print reservations for this day

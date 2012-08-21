@@ -249,7 +249,7 @@ function printLoginForm($msg = '', $resume = '') {
 		  <p><b><?php echo translate('Last Name')?></b></p>
 		</td>
 		<td>
-		  <input type="text" name="name" class="textbox" />
+		  <input type="password" name="name" class="textbox" />
 		</td>
 	  </tr>
 	  <tr bgcolor="#FFFFFF">

@@ -262,7 +262,7 @@ class Auth {
 	*/
 	function doLogin($uname, $pass, $cookieVal = null, $isCookie = false, $resume = '', $lang = '') {
 		global $conf;
-		$msg = '';
+		$msg = 'X';
 
 		if (empty($resume)) $resume = 'ctrlpnl.php';		// Go to control panel by default
 
