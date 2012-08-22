@@ -93,18 +93,19 @@ function showReservationTable($res, $err) {
     <td class="tableBorder">
       <table width="100%" border="0" cellspacing="1" cellpadding="0">
         <tr>
-          <td class="tableTitle" width="120">
+	  <!-- <td class="tableTitle" width="120"> -->
+          <td class="tableTitle">
 		  	<a href="javascript: void(0);" onclick="showHideCpanelTable('reservation');">&#8250; <?php echo translate('My Reservations')?></a></div>
 		  </td>
-		  <td class="tableTitle2">
+		 <!-- <td class="tableTitle2"> -->
 			<!-- <a href="export.php">Export Calendar to File</a> -->
 		  	<!-- <?php $link->doImageLink('export.php', 'img/export.gif', 'Export Reservations'); ?> -->
-		  </td>
+		  <!--</td>-->
           <td class="tableTitle">
             <div align="right">
               <!-- <a href="export.php">Export Calendar to File</a> -->
-			  <!-- <?php $link->doLink('javascript: help(\'my_reservations\');', '?', '', 'color: #FFFFFF;', translate('Help') . ' - ' . translate('My Reservations')) ?> -->
-			</div>
+			  <?php $link->doLink('javascript: help(\'my_reservations\');', '?', '', 'color: #FFFFFF;', translate('Help') . ' - ' . translate('My Reservations')) ?>
+	    </div>
           </td>
         </tr>
       </table>

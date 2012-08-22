@@ -134,9 +134,13 @@ padding: 0;
 font-size: 12pt;
 }
 
-#quicklinks td{
+/*#quicklinks td{
 	border: 1px solid #8799a9;
 
+}*/
+
+#quicklinks {
+	border: 1px solid #8799a9;
 }
 
 #quicklinks ul {
@@ -182,7 +186,7 @@ Form button settings
 */
 .button {
     font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-size: 10px;
+    /*font-size: 10px;*/
     font-weight: bold;
 	border: solid 1px #7C7A7A;
 	/*color: #36648B;*/

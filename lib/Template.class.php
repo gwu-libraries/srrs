@@ -355,34 +355,41 @@ class Template {
 					<li>
 					<a href="javascript:floorPic('img/6th-floor.gif')">6th Floor</a>
 					</li>
+					</ul>
 		            <?php
 					// If it's the admin, print out admin links
 					if ($is_admin) {
-						echo '<p style="margin-top:7px;font-weight:bold;">' . translate('System Administration') . '</p>';
+						echo '<p style="margin-top:7px;font-size:11pt;font-weight:bold;">' . translate('System Administration') . '</p>';
 					}
 					else if ($is_group_admin) {
-						echo '<p style="margin-top:7px;font-weight:bold;">' . translate('Group Administration') . '</p>';
+						echo '<p style="margin-top:7px;font-size:11pt;font-weight:bold;">' . translate('Group Administration') . '</p>';
 					}
 					if ($is_admin) {
 						echo
-						'<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=schedules', translate('Manage Schedules')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('blackouts.php', translate('Manage Blackout Times')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=resources', translate('Manage Resources')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=announcements', translate('Manage Announcements')) . "</p>\n"
-						. '<p style="margin-top:10px;"><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=groups', translate('Manage Groups')) . "</p>\n";
+						"<ul>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=schedules', translate('Manage Schedules')) . "</li>\n"
+						. '<li> ' .  $link->getLink('blackouts.php', translate('Manage Blackout Times')) . "</li>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=resources', translate('Manage Resources')) . "</li>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=announcements', translate('Manage Announcements')) . "</li>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=groups', translate('Manage Groups')) . "</li>\n"
+						. "</ul>\n";
 					}
 					if ($is_admin || $is_group_admin) {
 						echo
-						'<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=users', translate('Manage Users')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=reservations', translate('Manage Reservations')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=approval', translate('Approve Reservations')) . "</p>\n";
+						"<ul>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=users', translate('Manage Users')) . "</li>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=reservations', translate('Manage Reservations')) . "</li>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=approval', translate('Approve Reservations')) . "</li>\n"
+						. "</ul>\n";
 					}
 					if ($is_admin) {
 						echo
-						'<p style="margin-top:10px;"><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=email', translate('Mass Email Users')) . "</p>\n"
-		                . '<p><b>&raquo;</b> ' .  $link->getLink('usage.php', translate('Search Scheduled Resource Usage')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('admin.php?tool=export', translate('Export Database Content')) . "</p>\n"
-						. '<p><b>&raquo;</b> ' .  $link->getLink('stats.php', translate('View System Stats')) . "</p>\n";
+						"<ul>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=email', translate('Mass Email Users')) . "</li>\n"
+		                		. '<li> ' .  $link->getLink('usage.php', translate('Search Scheduled Resource Usage')) . "</li>\n"
+						. '<li> ' .  $link->getLink('admin.php?tool=export', translate('Export Database Content')) . "</li>\n"
+						. '<li> ' .  $link->getLink('stats.php', translate('View System Stats')) . "</li>\n"
+						. "</ul>\n";
 					}
 				?>
 
