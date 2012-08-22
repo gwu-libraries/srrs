@@ -71,6 +71,8 @@ class Template {
 	<style type="text/css">
 	@import url(<?php echo $path?>jscalendar/calendar-blue-custom.css);
 	@import url(<?php echo $path?>css.css);
+	@import url(<?php echo $path?>libheader_lite_ie.css);
+	@import url(<?php echo $path?>libheader_lite.css);
 	</style>
 	<script type="text/javascript" src="<?php echo $path?>jscalendar/calendar.js"></script>
 	<script type="text/javascript" src="<?php echo $path?>jscalendar/lang/<?php echo get_jscalendar_file()?>"></script>
