@@ -60,7 +60,7 @@ table {
 .insttitle {
 	background-image: url(img/insttitle.gif);
 	background-repeat:repeat-x;
-	font-size: 1.5em;
+	/*font-size: 1.5em;*/
 	color: #113855;
 	font-weight: 600;
 	padding-left: 8px;
@@ -113,9 +113,11 @@ float: left;
 }
 
 #maintable td {
-margin: 0;
-margin-right: 8px;
-padding: 0;
+	/*margin: 0;*/
+	margin: .2em;
+	margin-right: 8px;
+	/*padding: 0;8*/
+	padding: .2em;
 }
 
 #navcaltable {
@@ -183,7 +185,7 @@ Form button settings
     font-size: 10px;
     font-weight: bold;
 	border: solid 1px #7C7A7A;
-	color: #36648B;
+	/*color: #36648B;*/
 	background-color: #E7E7E7;
 }
 
