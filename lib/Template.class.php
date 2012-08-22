@@ -71,9 +71,13 @@ class Template {
 	<style type="text/css">
 	@import url(<?php echo $path?>jscalendar/calendar-blue-custom.css);
 	@import url(<?php echo $path?>css.css);
-	@import url(<?php echo $path?>libheader_lite_ie.css);
-	@import url(<?php echo $path?>libheader_lite.css);
 	</style>
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="libheader7_lite.css" type="text/css" media="screen" />
+
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="libheader7_lite_ie.css" type="text/css" media="screen" />
+        <![endif]-->
 	<script type="text/javascript" src="<?php echo $path?>jscalendar/calendar.js"></script>
 	<script type="text/javascript" src="<?php echo $path?>jscalendar/lang/<?php echo get_jscalendar_file()?>"></script>
 	<script type="text/javascript" src="<?php echo $path?>jscalendar/calendar-setup.js"></script>
@@ -103,11 +107,20 @@ class Template {
 		//	? '<div align="left"><img src="' . $conf['ui']['logoImage'] . '" alt="logo" vspace="5" /></div>'
 		//	: '';
 	?>
-	<div id="banner-bg">
+	<!--<div id="banner-bg">
 		<div id="banner">
 			<div id="comment"><a href="http://www.gelman.gwu.edu/search-1/feedback/studyroomres-feedback-form">Questions or Feedback?</a></div>
 		</div>
+	</div>-->
+<div id="libheader-container" style="">
+	<div id="libheader" style="">
+		<div class="libheader-logo hide-lo" style=""><a href="http://www.gwu.edu" target="_blank" title="GWU website"><img src="img/gwheaderlogo.png" alt="logo: The George Washington University" /></a></div>
+		<div class="libheader-liblink" style=""><a href="http://library.gwu.edu" target="_blank" title="GW Libraries website">GW Libraries</a></div>
+		<div class="libheader-link" style=""><a href="http://www.gelman.gwu.edu/search-1/feedback/studyroomres-feedback-form" target="_blank" title="">Questions or Feedback?</a></div>
 	</div>
+</div>
+
+
 	<div id="instructionbox">
 		<div class="inst">
 			<div class="insttitle">
