@@ -698,8 +698,8 @@ div.inlineSummary{
 float: left;
 width: 100%;
 border: 0;
-background-image: url(img/long_blue.jpg);
-background-repeat: repeat-x;
+/*background-image: url(img/long_blue.jpg);
+background-repeat: repeat-x;*/
 padding: 0;
 height: 28px;
 }

@@ -204,15 +204,27 @@ class Template {
 	?>
 	</div>
 	<div id="portal-footer">
+        <!-- this is the libfooter -->
+        <div id="libfooter-container" style="">
+                <div id="libfooter" style="">
+                        <div class="libfooter-text" style="">
+                                        <span class="address"><a href="http://library.gwu.edu" target="_blank" title="GW Libraries Website">GW Libraries</a>
+                                        &#8226; 2130 H Street NW &#8226; Washington DC 20052</span>
+                                        &#8226; <span class="tel">202.994.6558</span>
+                                        &#8226; <a href="mailto:refdesk@gwu.edu" target="_blank" title="">refdesk@gwu.edu</a>
+                        </div>
+                </div>
+        </div>
+        <!-- end libfooter -->
 	
-		<div id="footer-container">
+<!--		<div id="footer-container">
 		
 
 			<div class="footer-segment">Estelle and Melvin Gelman Library</div>
-    		<div class="footer-segment">2130 H St. NW</div>
+    			<div class="footer-segment">2130 H St. NW</div>
 			<div class="footer-segment">Washington, DC 20052</div>
 			<div class="footer-segment">202-994-6558</div>
-		</div>
+		</div> -->
 	</div>
 
 	<!-- <p id="footer" align="center"><a href="http://phpscheduleit.sourceforge.net">phpScheduleIt v<?php echo $conf['app']['version']?></a></p> -->
