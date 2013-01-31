@@ -83,7 +83,7 @@ input[type=submit], input[type=button], input[type=reset], button {
 	height: 2em; 
 	padding: 0 0 .3em;
 	background-color: #03314b;
-	background-image: url(bg-local-nav-bottom.png);
+	background-image: url(img/bg-local-nav-bottom.png);
 	background-position: bottom;
 	background-width: 100%;
 	background-repeat: repeat-x;
@@ -132,12 +132,11 @@ input[type=submit], input[type=button], input[type=reset], button {
 #libfooter a:hover {color:#fff; text-decoration:underline;} 
 
 /* responsive class to drop the gw logo when window is 720px or below (mobile-first)  */
-  .hide-lo {display:none; visibility:hidden;}
+@media screen and (max-width: 720px) {
+    .hide-lo {display:none; visibility:hidden;}
+    }
 
 /* this is set at 721 to leave room for links, adjust as needed if your links are shorter/longer */
 @media screen and (min-width: 721px) {
-	.hide-lo {
-		display: block;
-		visibility: visible;  
-	}
-}
+	.hide-lo {display: block; visibility: visible;}
+    }
