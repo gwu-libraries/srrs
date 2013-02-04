@@ -409,7 +409,7 @@ Summary popup box
 	text-align: center;
 	border: solid #686767 1px;
 	padding: 3px;
-	background-color: #05F711;
+	background-color: #5E7FB1 !important;
 	overflow: visible;
 	color: #FFFFFF;
 	border-bottom-style: none;
