@@ -72,7 +72,7 @@ $conf['app']['adminEmail'] = 'bietila@gelman.gwu.edu';
 $conf['app']['defaultLanguage'] = 'en_US';
 
 // If you are running PHP in safe mode, set this value to 1.  Otherwise keep the default. [0]
-$conf['app']['safeMode'] = 1;
+$conf['app']['safeMode'] = 0;
 
 // This will hide all personal data from normal users.  Admins will still see full data. [0]
 $conf['app']['privacyMode'] = 1;
@@ -97,7 +97,7 @@ $conf['app']['ccEmail'] = '';
 
 // Whether to send email notifications of reservation and registration activity to administrator [0]
 // can be 0 (for no) or 1 (for yes)
-$conf['app']['emailAdmin'] = 1;
+$conf['app']['emailAdmin'] = 0;
 
 // How to send email ['mail']
 /* Options are:
@@ -146,7 +146,7 @@ $conf['app']['readOnlyDetails'] = 0;
 
 // If we should log system activity or not [0]
 // Can be 0 (for no) and 1 (for yes)
-$conf['app']['use_log'] = 0;
+$conf['app']['use_log'] = 1;
 
 // Directory/file for log ['/var/log/phpscheduleitlog.txt']
 // Specify as /directory/filename.extension
@@ -175,13 +175,13 @@ $conf['app']['minPasswordLength'] = 6;
 $conf['db']['dbType'] = 'mysql';
 
 // Database user who can access the schedule database [schedule_user]
-$conf['db']['dbUser'] = 'dbietila_schedul';
+$conf['db']['dbUser'] = '';
 
 // Password for above user to access schedule database [password]
-$conf['db']['dbPass'] = '123';
+$conf['db']['dbPass'] = '';
 
 // Name for database [phpscheduleit]
-$conf['db']['dbName'] = 'dbietila_phpSchedlueIt';
+$conf['db']['dbName'] = '';
 
 // Prefix to attach to all table names []
 $conf['db']['tbl_prefix'] = '';
@@ -260,10 +260,10 @@ $conf['ldap']['basedn'] = "ou=people,o=domain.com";
 /// START COPY FOR VERSION 1.2.0 ///
 
 // This will allow or disable user self-registration.  If this is disabled, the admin will only be able to create users [1]
-$conf['app']['allowSelfRegistration'] = 1;
+$conf['app']['allowSelfRegistration'] = 0;
 
 // This will allow or disable the generation of RSS feeds for users to view their reservation data [1]
-$conf['app']['allowRss'] = 1;
+$conf['app']['allowRss'] = 0;
 
 // The GMT hour difference for the server [0]
 $conf['app']['timezone'] = -5;
@@ -283,4 +283,15 @@ $conf['ldap']['lookupid'] = 'jwt-unique=userName,ou=internal,ou=people,dc=domain
 $conf['ldap']['lookuppwd'] = 'userPassword';
 
 /// END COPY FOR VERSION 1.2.0 ///
+$conf['app']['max_reservations_per_day_per_user'] = 2;
+
+//if WRLC authentification is used set to 1
+$conf['app']['wrlc'] = 1;
+
+//number of login attempts for the WRLC authentication
+$conf['app']['loginAttempts'] = 10;
+
+//default time zone to be used for the users
+$conf['app']['default_timezone'] = -4;
+
 ?>

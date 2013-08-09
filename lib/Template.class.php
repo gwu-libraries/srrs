@@ -355,7 +355,11 @@ class Template {
 		            </li></ul>
 		<!--Showing Floor Plans to the user -->
 					<?php echo '<p style="margin-top:7;font-size:11pt;font-weight:bold;">' . translate('Floor Plans') . '</p>';?>
-					<ul><li>
+					<ul>
+					<li>
+					<a href="javascript:floorPic('img/2nd-floor.gif')">2nd Floor</a>
+					</li>
+					<li>
 					<a href="javascript:floorPic('img/3rd-floor.gif')">3rd Floor</a>
 					</li>
 					<li>
