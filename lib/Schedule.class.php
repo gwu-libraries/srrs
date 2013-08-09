@@ -29,6 +29,7 @@ class Schedule {
     var $res = array();
     var $blackouts = array();
     var $db;
+    var $database;
     var $user;
     var $scheduleType;
     var $scheduleid;
@@ -41,13 +42,15 @@ class Schedule {
     var $title;
     var $admin;
     var $isValid = false;
+    var $scheduleids = array();
 
     /**
     * Sets up initial variable values
     * @param constant $scheduleType type of schedule to print out
     */
-    function Schedule($scheduleid, $scheduleType = ALL) {
-        $this->scheduleid = $scheduleid;
+    function Schedule($scheduleid, $scheduleType = ALL) 
+    {
+	$this->scheduleid = $scheduleid;
         $this->scheduleType = $scheduleType;                // Set schedule type
 
         $this->db = new ScheduleDB($scheduleid, $scheduleType);            // Set database class
@@ -229,6 +232,7 @@ class Schedule {
 
             // If the date has not passed, resource is active and user has permission,
             //  or the user is the admin allow reservations to be made
+	    
             $shown = $this->canShowReservation($viewable_date, $cur_resource);
 
             $color = 'cellColor' . ($count%2);

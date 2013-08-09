@@ -420,7 +420,8 @@ function startNavCalTable() {
 ?>
 	<table id="navcaltable" width="100%" border="0" cellpadding="0" cellspacing="0" style= "padding-top:5px;">
 	<tr>
-	<td style="vertical-align:top; width:16%; border:solid 1px #36648B; background-color:#FFFFFF;">
+	<!--<td style="vertical-align:top; width:16%; border:solid 1px #36648B; background-color:#FFFFFF;">-->
+	    <td style="vertical-align:top; width:16%; border:solid 1px #8799A9; background-color:#FFFFFF;">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		  <tr>
 		    <td>
