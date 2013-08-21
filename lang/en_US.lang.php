@@ -146,6 +146,8 @@ $strings['Floor Plans'] = 'Study Room Maps';
 $strings['Successful update'] = 'Successful update';
 $strings['Update failed!'] = 'Update failed!';
 $strings['Manage Blackout Times'] = 'Manage Blackout Times';
+$strings['Blackout Rooms'] = 'Blackout Rooms';
+$strings['Add Blackout'] = 'Add Blackout';
 $strings['Forgot Password'] = 'Forgot Password';
 $strings['Manage My Email Contacts'] = 'Manage My Email Contacts';
 $strings['Choose Date'] = 'Choose Date';
@@ -317,6 +319,7 @@ $strings['Language'] = 'Language';
 $strings['(Default)'] = '(Default)';
 
 $strings['My Announcements'] = 'Announcements';
+$strings['Room'] = 'Room';
 $strings['My Reservations'] = 'My Reservations';
 $strings['My Permissions'] = 'My Permissions';
 $strings['My Quick Links'] = 'Menu';

@@ -82,6 +82,7 @@ function reserve(type, machid, start_date, resid, scheduleid, is_blackout, read_
 		
 		if (machid == null) { machid = ''; }
 		if (start_date == null) { start_date = ''; }
+                
 		if (resid == null) { resid = ''; }
 		if (scheduleid == null) { scheduleid = ''; }
 

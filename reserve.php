@@ -81,11 +81,24 @@ $t->printHTMLFooter();
 function process_reservation($fn) {
 	$success = false;
 	global $Class;
+	global $is_blackout;
+	if ($is_blackout)
+	{
+	    process_blackout_reservation($fn);
+	    return;
+	}
+	$start = strtotime($_POST['start_date']);
+	$end = strtotime($_POST['end_date']);
+	for($current = $start; $current <= $end; $current += 86400) 
+	{
+		
 	$is_pending = (isset($_POST['pending']) && $_POST['pending']);
-
 	if (isset($_POST['start_date'])) {			// Parse the POST-ed starting and ending dates
-		$start_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $_POST['start_date']) . '\');');
-		$end_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $_POST['end_date']) . '\');');
+		/*$start_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $current) . '\');');
+		$end_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $current) . '\');');*/
+		$start_date = $current;
+		$end_date = $current;
+		
 	}
 
 	if (isset($_POST['resid']))
@@ -95,7 +108,7 @@ function process_reservation($fn) {
 	else {
 		// New reservation
 		$res = new $Class(null, false, $is_pending);
-/*		if ($_POST['interval'] != 'none') {		// Check for reservation repeation
+	/*	if ($_POST['interval'] != 'none') {		// Check for reservation repeation
 			if ($start_date == $end_date) {
 				$res->is_repeat = true;
 				$days = isset($_POST['repeat_day']) ? $_POST['repeat_day'] : NULL;
@@ -111,7 +124,7 @@ function process_reservation($fn) {
 		else {*/
 			$repeat = array($start_date);
 			$res->is_repeat = false;
-	//	}
+		//}
 	}
 
 	$cur_user = new User(Auth::getCurrentID());
@@ -157,7 +170,8 @@ function process_reservation($fn) {
 		$res->resource = new Resource($_POST['machid']);
 		$res->scheduleid= $_POST['scheduleid'];
 		$res->repeat = $repeat;
-		$res->add_res($users_to_invite, $resources_to_add);
+		$res->add_res($users_to_invite, $resources_to_add, $repeat=true);
+		CmnFns::write_log("Return from add_res");
 	}
 	else if ($fn == 'modify') {
 		$res->summary = str_replace("\n", '', $_POST['summary']);
@@ -169,6 +183,120 @@ function process_reservation($fn) {
 	else if ($fn == 'approve') {
 		$res->approve_res(isset($_POST['mod_recur']));
 	}
+	CmnFns::write_log($current);
+}
+}
+
+/**
+* Processes a reservation request (add/del/edit)
+* @param string $fn function to perform
+*/
+function process_blackout_reservation($fn) {
+	$success = false;
+	global $Class;
+	$start = strtotime($_POST['start_date']);
+	$end = strtotime($_POST['end_date']);
+	for($current = $start; $current <= $end; $current += 86400) 
+	{
+	for($starthour = $_POST['starttime']; $starthour <= $_POST['endtime']; $starthour += 60)
+	{
+		
+	$is_pending = (isset($_POST['pending']) && $_POST['pending']);
+	CmnFns::write_log($current);
+	CmnFns::write_log($_POST['start_date']);
+	CmnFns::write_log($_POST['end_date']);
+	if (isset($_POST['start_date'])) {			// Parse the POST-ed starting and ending dates
+		/*$start_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $current) . '\');');
+		$end_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $current) . '\');');*/
+		$start_date = $current;
+		$end_date = $current;
+		
+	}
+
+	if (isset($_POST['resid']))
+		$res = new $Class($_POST['resid'], false, $is_pending);
+	else if (isset($_GET['resid']))
+		$res = new $Class($_GET['resid'], false, $is_pending);
+	else {
+		// New reservation
+		$res = new $Class(null, false, $is_pending);
+	/*	if ($_POST['interval'] != 'none') {		// Check for reservation repeation
+			if ($start_date == $end_date) {
+				$res->is_repeat = true;
+				$days = isset($_POST['repeat_day']) ? $_POST['repeat_day'] : NULL;
+				$week_num = isset($_POST['week_number']) ? $_POST['week_number'] : NULL;
+				$repeat = CmnFns::get_repeat_dates($start_date, $_POST['interval'], $days, $_POST['repeat_until'], $_POST['frequency'], $week_num);
+			}
+			else {
+				// Cannot repeat multi-day reservations
+				$repeat = array($start_date);
+				$res->is_repeat = false;
+			}
+		}
+		else {*/
+			$repeat = array($start_date);
+			$res->is_repeat = false;
+		//}
+	}
+
+	$cur_user = new User(Auth::getCurrentID());
+	$res->adminMode = Auth::isAdmin() || $cur_user->get_isadmin() || ($fn != 'create' && $cur_user->is_group_admin($res->user->get_groupids()));
+
+	if (Auth::isAdmin() || $cur_user->get_isadmin())
+	{
+		$res->is_pending = false;	
+	}
+	
+	if ($fn == 'create' || $fn == 'modify') {
+		$helper = new ReservationHelper();
+		$util = new Utility();
+
+		$orig = (isset($_POST['orig_invited_users']) && count($_POST['orig_invited_users']) > 0) ? $_POST['orig_invited_users'] : array();
+		$invited = (isset($_POST['invited_users'])) ? $_POST['invited_users'] : array();
+		$removed = (isset($_POST['removed_users'])) ? $_POST['removed_users'] : array();
+
+		$users_to_remove = $helper->getRowsForRemoval($orig, $removed, $invited);
+		$users_to_invite = $helper->getRowsForInvitation($orig, $invited);
+		$unchanged_users = $helper->getUnchangedUsers($orig, $invited);
+
+		$orig_resources = (isset($_POST['orig_resources']) && count($_POST['orig_resources']) > 0) ? $_POST['orig_resources'] : array();
+		$selected_resources =  (isset($_POST['selected_resources']) && count($_POST['selected_resources']) > 0) ? $_POST['selected_resources'] : array();
+
+		$resources_to_add = $util->getAddedItems($orig_resources, $selected_resources);
+		$resources_to_remove = $util->getRemovedItems($orig_resources, $selected_resources);
+
+		$res->user 		= new User($_POST['memberid']);
+		$res->start_date= $start_date;
+		$res->end_date 	= $end_date;
+		$res->start		= $starthour;
+		$res->end		= $starthour+60;
+
+		$res->summary	= stripslashes($_POST['summary']);
+		$res->allow_participation = (int)isset($_POST['allow_participation']);
+		$res->allow_anon_participation = (int)isset($_POST['allow_anon_participation']);
+		$res->reminderid = isset($_POST['reminderid']) ? $_POST['reminderid'] : null;
+		$res->reminder_minutes_prior = isset($_POST['reminder_minutes_prior']) ? intval($_POST['reminder_minutes_prior']) : 0;
+	}
+
+	if ($fn == 'create') {
+		$res->resource = new Resource($_POST['machid']);
+		$res->scheduleid= $_POST['scheduleid'];
+		$res->repeat = $repeat;
+		$res->add_res($users_to_invite, $resources_to_add, $repeat=true);
+		CmnFns::write_log("Return from add_res");
+	}
+	else if ($fn == 'modify') {
+		$res->summary = str_replace("\n", '', $_POST['summary']);
+		$res->mod_res($users_to_invite, $users_to_remove, $unchanged_users, $resources_to_add, $resources_to_remove, isset($_POST['del']), isset($_POST['mod_recur']));
+	}
+	else if ($fn == 'delete') {
+		$res->del_res(isset($_POST['mod_recur']));
+	}
+	else if ($fn == 'approve') {
+		$res->approve_res(isset($_POST['mod_recur']));
+	}
+}
+}
 }
 
 /**
@@ -185,7 +313,14 @@ function present_reservation($resid) {
 	if ($resid == null) {
 		$res->resource = new Resource($_GET['machid']);
 		$res->start_date = $_GET['start_date'];
-		$res->end_date = $_GET['start_date'];
+		if (isset($_GET['end_date']))
+		{
+		    $res->end_date = $_GET['end_date'];
+		}
+		else
+		{
+		    $res->end_date = $_GET['start_date'];
+		}
 		$res->user = new User(Auth::getCurrentID());
 		$res->is_pending = $_GET['pending'];
 		$res->start = $_GET['starttime'];

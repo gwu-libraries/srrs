@@ -65,9 +65,39 @@ class Template {
 	}
 	?>
 	<link rel="shortcut icon" href="favicon.ico"/>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 	<link rel="icon" href="favicon.ico"/>
 	<script language="JavaScript" type="text/javascript" src="<?php echo $path?>functions.js"></script>
 	<script language="JavaScript" type="text/javascript" src="<?php echo $path?>ajax.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	<script>
+  	$(function() {
+    	    $( "#start_date" ).datepicker({
+   	    altField: '#start',
+            altFormat: '@',        // Gives a timestamp dateformat
+	    onSelect: function(selectedDate){ 
+		var curtime =  $.datepicker.parseDate("mm/dd/yy",selectedDate);
+		var adjustedtime = curtime.setMinutes(curtime.getMinutes() + curtime.getTimezoneOffset()); 
+		var timestamp = adjustedtime.valueOf() / 1000 ;
+		$("#start").val(timestamp);
+	    }
+   	});
+
+	    $( "#end_date" ).datepicker({
+   	    altField: '#end',
+            altFormat: '@',        // Gives a timestamp dateformat
+	    onSelect: function(selectedDate){ 
+		var curtime =  $.datepicker.parseDate("mm/dd/yy",selectedDate);
+		var adjustedtime = curtime.setMinutes(curtime.getMinutes() + curtime.getTimezoneOffset()); 
+		var timestamp = adjustedtime.valueOf() / 1000 ;
+		$("#end").val(timestamp);
+            }
+   	});
+
+
+  	});
+        </script>
 	<style type="text/css">
 	@import url(<?php echo $path?>jscalendar/calendar-blue-custom.css);
 	@import url(<?php echo $path?>css.css);
@@ -385,6 +415,7 @@ class Template {
 						"<ul>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=schedules', translate('Manage Schedules')) . "</li>\n"
 						. '<li> ' .  $link->getLink('blackouts.php', translate('Manage Blackout Times')) . "</li>\n"
+						. '<li> ' .  $link->getLink('blackouts_form.php', translate('Blackout Rooms')) . "</li>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=resources', translate('Manage Resources')) . "</li>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=announcements', translate('Manage Announcements')) . "</li>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=groups', translate('Manage Groups')) . "</li>\n"

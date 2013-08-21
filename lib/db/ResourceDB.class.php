@@ -42,14 +42,47 @@ class ResourceDB extends DBEngine {
 		$this->check_for_error($result);
 		
 		while ($rs = $result->fetchRow()) {
-			foreach ($rs as $key => $value) {
-				$properties[$key] = $value;
-			}
+			
+		 foreach ($rs as $key => $value) {
+                                $properties[$key] = $value;
+                        }
+
+
+	
 		}
 		
 		$result->free();
 		
 		return $properties;
 	}
+
+	/**
+         * Returns name and machids of all resources from the resource table for all resources
+         * @return an array of all fields in the resource table for all resources
+         */
+        function get_all_resources() {
+                $properties = array();
+
+                $query = 'SELECT name, machid FROM ' . $this->get_table('resources');
+                $result = $this->db->query($query);
+                $this->check_for_error($result);
+
+
+	while ($rs = $result->fetchRow()) {
+                        
+               
+                                $properties[$rs['machid']] = $rs['name'];
+                        
+
+                        
+                }
+
+
+                $result->free();
+ 		asort($properties);
+
+                return $properties;
+        }
+
 }
 ?>

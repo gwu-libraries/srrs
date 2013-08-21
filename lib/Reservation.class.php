@@ -174,7 +174,6 @@ class Reservation {
 	function add_res($users_to_invite = array(), $resources_to_add = array()) {
 		$this->type     = RES_TYPE_ADD;
 		$repeat = $this->repeat;
-
 		$orig_start_date = $this->start_date;		// Store the original dates because they will be changed if we repeat
 		$orig_end_date = $this->end_date;
 		$accept_code = $this->db->get_new_id();
