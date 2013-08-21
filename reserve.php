@@ -171,7 +171,6 @@ function process_reservation($fn) {
 		$res->scheduleid= $_POST['scheduleid'];
 		$res->repeat = $repeat;
 		$res->add_res($users_to_invite, $resources_to_add, $repeat=true);
-		CmnFns::write_log("Return from add_res");
 	}
 	else if ($fn == 'modify') {
 		$res->summary = str_replace("\n", '', $_POST['summary']);
@@ -202,9 +201,6 @@ function process_blackout_reservation($fn) {
 	{
 		
 	$is_pending = (isset($_POST['pending']) && $_POST['pending']);
-	CmnFns::write_log($current);
-	CmnFns::write_log($_POST['start_date']);
-	CmnFns::write_log($_POST['end_date']);
 	if (isset($_POST['start_date'])) {			// Parse the POST-ed starting and ending dates
 		/*$start_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $current) . '\');');
 		$end_date = eval('return mktime(0,0,0, \'' . str_replace(INTERNAL_DATE_SEPERATOR, '\',\'', $current) . '\');');*/
