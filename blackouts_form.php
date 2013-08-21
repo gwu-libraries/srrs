@@ -74,7 +74,7 @@ $t->splitTable();
 <td class="formNames" >
 <?php echo 'Start Date'; ?></td>
 <td class="cellColor">
-<input  type="text" id="start_date" />
+<input  type="text" id="start_date" readonly="readonly"/>
 </td>
 </tr>
 
@@ -93,7 +93,7 @@ $t->splitTable();
 <td class="formNames" >
 <?php echo 'End Date'; ?></td>
 <td class="cellColor">
-<input type="text" id="end_date" />
+<input type="text" id="end_date" readonly="readonly"/>
 </td>
 </tr>
 
