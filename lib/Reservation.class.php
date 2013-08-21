@@ -171,7 +171,7 @@ class Reservation {
 	* @param array $users_to_invite array of users to invite to this reservation
 	* @param array $resources_to_add array of additional resources to add to this reservation
 	*/
-	function add_res($users_to_invite = array(), $resources_to_add = array()) {
+	function add_res($users_to_invite = array(), $resources_to_add = array(), $log = 0) {
 		$this->type     = RES_TYPE_ADD;
 		$repeat = $this->repeat;
 		$orig_start_date = $this->start_date;		// Store the original dates because they will be changed if we repeat
@@ -248,7 +248,7 @@ class Reservation {
 		if (!$this->is_pending && count($users_to_invite) > 0) {
 			$this->invite_users($users_to_invite, $dates, $accept_code);
 		}
-
+		if($log)
 		if (!$this->is_repeat || $tmp_valid)
 			$this->print_success('created', $dates);
 	}

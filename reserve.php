@@ -182,7 +182,6 @@ function process_reservation($fn) {
 	else if ($fn == 'approve') {
 		$res->approve_res(isset($_POST['mod_recur']));
 	}
-	CmnFns::write_log($current);
 }
 }
 
@@ -197,7 +196,7 @@ function process_blackout_reservation($fn) {
 	$end = strtotime($_POST['end_date']);
 	for($current = $start; $current <= $end; $current += 86400) 
 	{
-	for($starthour = $_POST['starttime']; $starthour <= $_POST['endtime']; $starthour += 60)
+	for($starthour = $_POST['starttime']; $starthour < $_POST['endtime']; $starthour += 60)
 	{
 		
 	$is_pending = (isset($_POST['pending']) && $_POST['pending']);
@@ -278,8 +277,10 @@ function process_blackout_reservation($fn) {
 		$res->resource = new Resource($_POST['machid']);
 		$res->scheduleid= $_POST['scheduleid'];
 		$res->repeat = $repeat;
-		$res->add_res($users_to_invite, $resources_to_add, $repeat=true);
-		CmnFns::write_log("Return from add_res");
+		if ($current == $end)
+		    $res->add_res($users_to_invite, $resources_to_add, 1);
+		else
+		    $res->add_res($users_to_invite, $resources_to_add);
 	}
 	else if ($fn == 'modify') {
 		$res->summary = str_replace("\n", '', $_POST['summary']);
