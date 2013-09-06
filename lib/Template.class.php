@@ -416,9 +416,7 @@ class Template {
 						. '<li> ' .  $link->getLink('admin.php?tool=schedules', translate('Manage Schedules')) . "</li>\n"
 						. '<li> ' .  $link->getLink('blackouts.php', translate('Manage Blackout Times')) . "</li>\n"
 						. '<li> ' .  $link->getLink('blackouts_form.php', translate('Blackout Rooms')) . "</li>\n"
-						. '<li> ' .  $link->getLink('admin.php?tool=resources', translate('Manage Resources')) . "</li>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=announcements', translate('Manage Announcements')) . "</li>\n"
-						. '<li> ' .  $link->getLink('admin.php?tool=groups', translate('Manage Groups')) . "</li>\n"
 						. "</ul>\n";
 					}
 					if ($is_admin || $is_group_admin) {
@@ -426,16 +424,13 @@ class Template {
 						"<ul>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=users', translate('Manage Users')) . "</li>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=reservations', translate('Manage Reservations')) . "</li>\n"
-						. '<li> ' .  $link->getLink('admin.php?tool=approval', translate('Approve Reservations')) . "</li>\n"
 						. "</ul>\n";
 					}
 					if ($is_admin) {
 						echo
 						"<ul>\n"
-						. '<li> ' .  $link->getLink('admin.php?tool=email', translate('Mass Email Users')) . "</li>\n"
 		                		. '<li> ' .  $link->getLink('usage.php', translate('Search Scheduled Resource Usage')) . "</li>\n"
 						. '<li> ' .  $link->getLink('admin.php?tool=export', translate('Export Database Content')) . "</li>\n"
-						. '<li> ' .  $link->getLink('stats.php', translate('View System Stats')) . "</li>\n"
 						. "</ul>\n";
 					}
 				?>
