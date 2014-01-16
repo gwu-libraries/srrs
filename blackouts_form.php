@@ -139,7 +139,7 @@ $t->splitTable();
 <?php echo 'End Time'; ?></td>
 <td class="cellColor">
 <select name="endtime" class="textbox">
-//<option value="0">12am</option> ---changed by krunal--
+<!--<option value="0">12am</option> ---changed by krunal-- -->
 <option value="60">1am</option>
 <option value="120">2am</option>
 <option value="180">3am</option>
