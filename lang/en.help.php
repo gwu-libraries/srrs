@@ -44,8 +44,8 @@
 	</li>
 	<li><h5>What do the colors on the grid mean?</h5>
 		<ul>
-			<li>Green blocks (with horizontal stripes) indicate reservations that you have placed.</li>
-			<li>Red blocks (with vertical stripes) are reservations that others have placed.</li>
+			<li>Black blocks indicate blacked out time slots that cannot be reserved.</li>
+			<li>Red blocks are time slots that have been reserved.</li>
 			<li>Grey blocks are time slots that are in the past and are no longer available.</li>
 		</ul>
 	</li>
@@ -65,7 +65,7 @@
 	<li><h5>Do I need to bring anything to claim my room?</h5>
 		<p>You should receive an email confirmation of your reservation. We suggest that you print this out and bring it with you as proof of your reservation.<p>
 	<li><h5>What rooms can be reserved through this system?</h5>
-		<p>Any of the 36 group study rooms within Gelman Library can be reserved through this system. These rooms are located on the 3rd, 4th, 5th, and 6th floors.</p>
+		<p>Any of the 40 group study rooms within Gelman Library can be reserved through this system. These rooms are located on the 2nd, 3rd, 4th, 5th, and 6th floors.</p>
 	<li><h5>Who should I contact with questions?</h5>
 		<p>Please submit questions or comments through this <a href="http://www.gelman.gwu.edu/search-1/feedback/studyroomres-feedback-form">form</a>.<p>
 	</li>
