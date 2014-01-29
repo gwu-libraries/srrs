@@ -391,6 +391,7 @@ function write_blackout($colspan, $viewable, $blackoutid, $summary = '', $showsu
     }
 
     $summary_text = $summary->toScheduleCell();
+    $js = "onmouseover=\"showDescription('timeslotinfo','blackout');\" onmouseout=\"hideDescription('timeslotinfo');\"";
 
     echo "<td colspan=\"$colspan\" style=\"color: $text; background-color: $color;\" $js ><div class=\"inlineSummary\">$summary_text</div></td>";
 }

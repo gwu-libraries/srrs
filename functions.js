@@ -469,6 +469,10 @@ function showDescription(object, type)
 		text = "Grayed out time slots exceed maximum booking notice. Click a white square to place a reservation.";
 		bg_color = '#3F2F25';
 	break;
+	case 'blackout':
+		text = "Blackout out time slots are for staff only. Click a white square to place a reservation.";
+		bg_color = '#3F2F25';
+	break;
 	default:
 		text = 'This slot is available. Click to reserve it.';
 	}
