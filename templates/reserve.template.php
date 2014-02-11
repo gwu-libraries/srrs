@@ -30,6 +30,16 @@ function begin_reserve_form($show_repeat, $is_blackout = false) {
 }
 
 /**
+* Opens form for reserve
+* @param bool $show_repeat whether to show the repeat box
+* @param bool $is_blackout if this is a blackout
+*/
+function begin_mul_reserve_form($show_repeat, $is_blackout = false, $i) {
+	echo '<form target="_blank" name="reserve" id="reserve' . $i .'" method="post" action="' . $_SERVER['PHP_SELF'] . '?is_blackout=' . intval($is_blackout) . '" style="margin: 0px"' . " onsubmit=\"return check_reservation_form(this);\">\n";	
+
+}
+
+/**
 * Begins the outer reservation table.  This prints out the tabs for basic/advanced
 * and switches between them
 * @param none
@@ -519,7 +529,7 @@ function print_buttons_and_hidden(&$res) {
 	echo '</p>';
 	
 	if ($type == RES_TYPE_ADD || $type == RES_TYPE_MODIFY) {
-		echo '</td><td align="right"><button type="button" name="check" value="' . translate('Check Availability') . '" class="button" onclick="checkReservation(\'check.php\', \'reserve\', \'' . translate('Checking') . '\');">' . translate('Check Availability') . '</button></td><td>';	
+		echo '</td><td align="right"><button type="button" name="check" value="' . translate('Check Availability') . '" class="button" onclick="checkReservation(\'check.php\', \'reserve\', \'1\',\'' . translate('Checking') . '\');">' . translate('Check Availability') . '</button></td><td>';	
 	}
 
 	// print hidden fields
@@ -541,6 +551,80 @@ function print_buttons_and_hidden(&$res) {
   		echo '<tr><td colspan="2"><div id="checkDiv" style="display:none;width:100%;padding-top:15px;"></div></td></tr>';
 	}
   ?>
+</table>
+<?php
+}
+
+/**
+* Prints all the buttons and hidden fields for blackout rooms
+* @param object $res Reservation object to work with
+*/
+function print_mul_buttons_and_hidden(&$res, $i) {
+?>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td>
+<?php
+	$is_owner = ($res->user->get_id() == Auth::getCurrentID());
+	$type = $res->get_type();
+      // Print buttons depending on type
+    echo '<p>';
+	switch($type) {
+  	    case RES_TYPE_MODIFY :
+            echo '<input type="submit" name="btnSubmit" value="' . translate('Save') . '" class="button" onclick="selectAllOptions(this);"/>'
+				. '<input type="hidden" name="fn" value="modify" />';
+	    break;
+        case RES_TYPE_DELETE :
+            echo '<input type="submit" name="btnSubmit" value="' . translate('Delete') . '" class="button" />'
+					. '<input type="hidden" name="fn" value="delete" />';
+	    break;
+        case RES_TYPE_VIEW :
+            echo '<input type="button" name="close" value="' . translate('Close Window') . '" class="button" onclick="window.close();" />';
+	    break;
+        case RES_TYPE_ADD :
+            echo '<input type="submit" name="btnSubmit" value="' . translate('Save') . '" class="button" onclick="selectAllOptions(this);"/>'
+					. '<input type="hidden" name="fn" value="create" />';
+        break;
+		case RES_TYPE_APPROVE :
+			echo '<input type="submit" name="btnSubmit" value="' . translate('Approve') . '" class="button"/>'
+				. '<input type="hidden" name="fn" value="approve" />';
+    }
+    // Print cancel button as long as type is not "view"
+	if ($type != RES_TYPE_VIEW) {
+		echo '&nbsp;&nbsp;&nbsp;<input type="button" name="close" value="' . translate('Cancel') . '" class="button" onclick="window.close();" />';
+	}
+	if ($type != RES_TYPE_ADD && $is_owner) {
+		// echo '&nbsp;&nbsp;';
+		// print_export_button($res->id);
+	}
+	
+	echo '</p>';
+	
+	if ($type == RES_TYPE_ADD || $type == RES_TYPE_MODIFY) {
+		echo '</td><td align="right"><button type="button" name="check" value="' . translate('Check Availability') . '" class="button" onclick="checkReservation(\'check.php\', \''. 'reserve'. $i .'\' , \'' . $i .'\' , \'' . translate('Checking') . '\');">' . translate('Check Availability') . '</button></td><td>';	
+	}
+
+	// print hidden fields
+	if ($res->get_type() == RES_TYPE_ADD) {
+        echo '<input type="hidden" name="machid" value="' . $res->get_machid(). '" />' . "\n"
+			  . '<input type="hidden" name="scheduleid" value="' . $res->sched['scheduleid'] . '" />' . "\n"
+			  . '<input type="hidden" name="pending" value="' . $res->get_pending(). '" />' . "\n"
+			  . '<input type="hidden" name="memberid" value="' . Auth::getCurrentID() . '" />' . "\n";;
+    }
+    else {
+        echo '<input type="hidden" name="resid" id="resid" value="' . $res->get_id() . '" />' . "\n"
+			. '<input type="hidden" name="memberid" value="' . $res->get_memberid() . '" />' . "\n";;
+    }
+?>
+    </td>
+  </tr>
+  <?php 
+	if ($type == RES_TYPE_ADD || $type == RES_TYPE_MODIFY) {
+  		echo '<tr><td colspan="2"><div id="checkDiv' . $i .'" style="display:none;width:100%;padding-top:15px;"></div></td></tr>';
+	}
+  ?>
+<div class="response">
+</div>
 </table>
 <?php
 }

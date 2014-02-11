@@ -194,6 +194,8 @@ function process_blackout_reservation($fn) {
 	global $Class;
 	$start = strtotime($_POST['start_date']);
 	$end = strtotime($_POST['end_date']);
+	$data = $_POST['machid'];
+	CmnFns::write_log("Selected Rooms " . print_r($data));
 	for($current = $start; $current <= $end; $current += 86400) 
 	{
 	for($starthour = $_POST['starttime']; $starthour < $_POST['endtime']; $starthour += 60)
@@ -303,37 +305,72 @@ function process_blackout_reservation($fn) {
 */
 function present_reservation($resid) {
 	global $Class;
+        $reservations = Array();
+	if (is_array($_GET['machid']))
+        {
+            $rooms = $_GET['machid'];
+	    foreach($rooms as $room)
+            {
+	            // Get info about this reservation
+	            $res = new $Class($resid, false, false, $_GET['scheduleid']);
+	            // Load the properties
+                    load_properties($resid, $res, $room);
 
-	// Get info about this reservation
-	$res = new $Class($resid, false, false, $_GET['scheduleid']);
-	// Load the properties
-	if ($resid == null) {
-		$res->resource = new Resource($_GET['machid']);
-		$res->start_date = $_GET['start_date'];
-		if (isset($_GET['end_date']))
-		{
-		    $res->end_date = $_GET['end_date'];
-		}
-		else
-		{
-		    $res->end_date = $_GET['start_date'];
-		}
-		$res->user = new User(Auth::getCurrentID());
-		$res->is_pending = $_GET['pending'];
-		$res->start = $_GET['starttime'];
-		$res->end = $_GET['endtime'];
+	            $cur_user = new User(Auth::getCurrentID());
+	            $res->adminMode = Auth::isAdmin() || $cur_user->get_isadmin() || $cur_user->is_group_admin($res->user->get_groupids() );
+	
+	            if (Auth::isAdmin() || $cur_user->get_isadmin())
+	            {
+		        $res->is_pending = false;	
+	            }
+	
+	            $res->set_type($_GET['type']);
+                    array_push($reservations, $res);
+                }
+                $Class::print_mul_res($reservations);
 	}
+	else 
+        {
+		$res = new $Class($resid, false, false, $_GET['scheduleid']);
+                // Load the properties
+                load_properties($resid, $res, $_GET['machid']);
 
-	$cur_user = new User(Auth::getCurrentID());
-	$res->adminMode = Auth::isAdmin() || $cur_user->get_isadmin() || $cur_user->is_group_admin($res->user->get_groupids() );
-	
-	if (Auth::isAdmin() || $cur_user->get_isadmin())
-	{
-		$res->is_pending = false;	
+                $cur_user = new User(Auth::getCurrentID());
+                $res->adminMode = Auth::isAdmin() || $cur_user->get_isadmin() || $cur_user->is_group_admin($res->user->get_groupids() );
+        
+                if (Auth::isAdmin() || $cur_user->get_isadmin())
+                {
+                    $res->is_pending = false;   
+                }
+        
+                $res->set_type($_GET['type']);
+                $res->print_res();
 	}
-	
-	$res->set_type($_GET['type']);
-	$res->print_res();
+}
+
+/**
+* loads the properties for a given reservation object
+* @param reservation object and machid
+*/
+
+function load_properties($resid, $res, $mach) {
+    if ($resid == null) { 
+                $res->resource = new Resource($mach);
+                $res->start_date = $_GET['start_date'];
+                if (isset($_GET['end_date']))
+                {
+                    $res->end_date = $_GET['end_date'];
+                }
+                else
+                {
+                    $res->end_date = $_GET['start_date'];
+                }
+                $res->user = new User(Auth::getCurrentID());
+                $res->is_pending = $_GET['pending'];
+                $res->start = $_GET['starttime'];
+                $res->end = $_GET['endtime'];
+        }
+
 }
 
 
