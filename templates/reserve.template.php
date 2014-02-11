@@ -529,7 +529,7 @@ function print_buttons_and_hidden(&$res) {
 	echo '</p>';
 	
 	if ($type == RES_TYPE_ADD || $type == RES_TYPE_MODIFY) {
-		echo '</td><td align="right"><button type="button" name="check" value="' . translate('Check Availability') . '" class="button" onclick="checkReservation(\'check.php\', \'reserve\', \'1\',\'' . translate('Checking') . '\');">' . translate('Check Availability') . '</button></td><td>';	
+		echo '</td><td align="right"><button type="button" name="check" value="' . translate('Check Availability') . '" class="button" onclick="checkReservation(\'check.php\', \'reserve\', \'\',\'' . translate('Checking') . '\');">' . translate('Check Availability') . '</button></td><td>';	
 	}
 
 	// print hidden fields
