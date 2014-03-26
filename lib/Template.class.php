@@ -71,6 +71,7 @@ class Template {
 	<script language="JavaScript" type="text/javascript" src="<?php echo $path?>ajax.js"></script>
 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
   	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/jquery.multiselect.js"></script>
 	<script>
   	$(function() {
     	    $( "#start_date" ).datepicker({
@@ -94,8 +95,7 @@ class Template {
 		$("#end").val(timestamp);
             }
    	});
-
-
+	    $("#machids").multiselect();
   	});
         </script>
         
@@ -123,6 +123,7 @@ class Template {
 	</style>
         <!-- stylesheets -->
         <link rel="stylesheet" href="libheader7_lite.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/jquery.multiselect.css" type="text/css">
 
         <!--[if lt IE 9]>
         <link rel="stylesheet" href="libheader7_lite_ie.css" type="text/css" media="screen" />

@@ -59,10 +59,10 @@ $t->splitTable();
         <tr>
           <td  class="formNames"><?php echo translate('Room'); ?></td>
           <td class="cellColor">
-	      <select name="machid"  />
+	      <select name="machid[]"  id="machids" multiple="multiple"/>
 	      <?php $results = $r->get_all_resources();
 	      foreach ($results as $key => $value){
-              echo "<option value = $key> $value </option>";
+              echo "<option value = \"$key\"> $value </option>";
 	      }
               ?>
               </select>

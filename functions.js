@@ -647,6 +647,7 @@ function moveSelectItems(from, to) {
 function selectAllOptions(button) {
 	var form = button.form;
 	var i;
+        button.value = 'Done';
 	
 	for (i = 0; i < form.elements.length; i++) {
 		if (form.elements[i].type == "select-multiple" && form.elements[i].multiple == true) {

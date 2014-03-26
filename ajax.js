@@ -23,12 +23,14 @@ function createRequestObject() {
 	return request_obj;
 }
 
-function checkReservation(url, formid, txt) {
-	var div = document.getElementById("checkDiv");
+function checkReservation(url, formid, id, txt) {
+	if (typeof(id)==='undefined')
+                    id = '';
+	var div = document.getElementById("checkDiv" + id);
 	var f = document.getElementById(formid);
 	
 	http_request = createRequestObject();	
-	http_request.onreadystatechange = showCheckResults;
+	http_request.onreadystatechange = function () {showCheckResults(id);};
 	http_request.open('POST', url + document.location.search.substring(0), true);
 	http_request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	
@@ -63,10 +65,12 @@ function buildKeyValueString(f, keyValue) {
 	return keyValue;
 }
 
-function showCheckResults() {
+function showCheckResults(id) {
 	if (http_request.readyState == 4) {
+                if (typeof(id)==='undefined')
+		    id = '';
 		var txt = "";
-		var div = document.getElementById("checkDiv");
+		var div = document.getElementById("checkDiv"+id);
 	
 		if (http_request.status == 200) {
 			div.style.textAlign = "left";

@@ -200,6 +200,7 @@ $strings['Cancel'] = 'Cancel';
 $strings['View'] = 'View';
 $strings['Modify'] = 'Modify';
 $strings['Save'] = 'Save';
+$strings['Done'] = 'Done';
 $strings['Back'] = 'Back';
 $strings['Next'] = 'Next';
 $strings['Close Window'] = 'Close Window';

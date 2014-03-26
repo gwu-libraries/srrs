@@ -509,10 +509,12 @@ class Reservation {
 
 		$this_length = ( $this->end - $this->start);
 		$is_valid = ($this_length >= ($min)) && (($this_length) <= ($max));
+		if ($this->adminMode)
+		    $is_valid = True;
 		if (!$is_valid)
-			$this->add_error(translate('Reservation length does not fall within this resource\'s allowed length.') . '<br /><br >'
-					. translate('Your reservation is') . ' ' . Time::minutes_to_hours($this_length) . '<br />'
-					. translate('Minimum reservation length') . ' ' . Time::minutes_to_hours($min). '<br />'
+			$this->add_error(translate('Reservation length does not fall within this resource\'s allowed length.') . '</br></br>' 
+					. translate('Your reservation is') . ' ' . Time::minutes_to_hours($this_length) . '</br>'
+					. translate('Minimum reservation length') . ' ' . Time::minutes_to_hours($min) . '</br>'
 					. translate('Maximum reservation length') . ' ' . Time::minutes_to_hours($max)
 					);
 		return $is_valid;
@@ -696,6 +698,78 @@ class Reservation {
 
 		if ((bool)$this->allow_anon_participation || (bool)$this->allow_participation) {
 			print_join_form_tags();
+		}
+	}
+
+	/**
+	* Prints out the reservation table for multiple reservations
+	* @param reservations array
+	*/
+	static function print_mul_res($reservations) {
+		global $conf;
+                $i = 0;
+                
+                foreach($reservations as $res)
+                {
+		    $i = $i + 1;
+		    $is_private = $conf['app']['privacyMode'] && !$res->adminMode;
+
+		    $day_has_passed = !$res->check_startdate();
+
+		    if (!$res->adminMode && !$res->is_blackout && $day_has_passed )  {
+			$this->type = RES_TYPE_VIEW;
+		    }
+		
+		    if (Auth::getCurrentID() != $res->user->get_id() && !$res->adminMode) { $res->type = RES_TYPE_VIEW; };
+
+		    $rs = $res->resource->properties;
+		    if ($res->type == RES_TYPE_ADD && $rs['approval'] == 1 && !Auth::IsAdmin()) {
+			$res->is_pending = true;		// On the initial add, make sure that the is_pending flag is correct
+		    }
+
+		    $is_owner = (($res->user->get_id() == Auth::getCurrentID() || $res->adminMode) && $res->type != RES_TYPE_VIEW);
+
+		    print_title($rs['name']);
+		    begin_mul_reserve_form($res->type == RES_TYPE_ADD, $res->is_blackout, $i);
+		    begin_container();
+		
+		    if (empty($res->start)) {
+			$res->start = $res->sched['daystart'];
+			$res->end = $res->start + $res->sched['timespan'];
+		    }
+		
+		    print_basic_panel($res, $rs, $is_private && !$is_owner);		// Contains resource/user info, time select, summary, repeat boxes
+
+		    if ($res->is_blackout || $is_private) {
+			print_users_panel($res, array(), null, '', false, false);	// No advanced for either case
+		    }
+		    else
+		    {
+			$res->user->get_id();
+
+			$all_users = ($is_owner) ? $res->db->get_non_participating_users($res->id, Auth::getCurrentID()) : array();
+			print_users_panel($res, $all_users, $is_owner, $rs['max_participants'], true, $day_has_passed);
+		    }
+		
+		    if ($res->is_blackout)
+		    {
+			print_additional_tab($res, array(), false, false);
+		    }
+		    else
+		    {			
+			$all_resources = ($is_owner) ? $res->db->get_non_participating_resources($res->id) : array();
+			print_additional_tab($res, $all_resources, $is_owner, true);
+		    }
+
+		    end_container();
+                    
+		    print_mul_buttons_and_hidden($res, $i);
+		    end_reserve_form();
+		    print_jscalendar_setup($res, $rs);
+
+		    if ((bool)$res->allow_anon_participation || (bool)$res->allow_participation) {
+			print_join_form_tags();
+		    }
 		}
 	}
 
