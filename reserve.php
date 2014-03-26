@@ -196,7 +196,7 @@ function process_blackout_reservation($fn) {
 	$end = strtotime($_POST['end_date']);
 	for($current = $start; $current <= $end; $current += 86400) 
 	{
-	for($starthour = $_POST['starttime']; $starthour < $_POST['endtime']; $starthour += 60)
+	for($starthour = $_POST['starttime']; $starthour <= $_POST['endtime']; $starthour += 60)
 	{
 		
 	$is_pending = (isset($_POST['pending']) && $_POST['pending']);
